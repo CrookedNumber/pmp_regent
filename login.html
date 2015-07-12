@@ -1,0 +1,28 @@
+<form ng-controller="PMPLoginController" method="post">
+  <fieldset name="prod"><label for="prod">Production</label>
+    <label for="client">Client ID</label>
+    <input type="text" name="productionClient" ng-model="production.client">
+    <label for="prodsecret">Secret</label>
+    <input type="text" name="productionSecret" ng-model="production.secret">
+    <input type="submit" value="Submit" ng-click="saveLogin('production')">
+  </fieldset>
+</form>  
+ 
+<form ng-controller="PMPLoginController" method="post">
+  <fieldset name="sandbox"><label for="sandbox">Sandbox</label>
+    <label for="client">Client ID</label>
+    <input type="text" name="sandboxClient" ng-model="sandbox.client">
+    <label for="secret">Secret</label>
+    <input type="text" name="sandboxSecret" ng-model="sandbox.secret">
+    <input type="submit" value="Submit" ng-click="saveLogin('sandbox')">
+  </fieldset>
+</form>
+
+<form ng-controller="PMPLoginController" method="post">  
+  <fieldset name="platform"><label for="platform">Change Platform</label>
+    <select ng-model="platform">
+    <option value="sandbox">Sandbox</option>
+    <option value="production">Production</option>
+    <input type="submit" value="Submit" ng-click="changePlatform()">
+  </select>
+</form>

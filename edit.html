@@ -1,0 +1,22 @@
+<div ng-include="'navigation.html'">
+</div>
+<article class="module width_full" ng-controller="PMPEditController">
+    <header><h3>Edit Doc</h3></header>
+    	<div class="module_content">
+    	<div>{{ message }}</div>
+    	<!--<div>{{ details }}</div>-->
+    			<fieldset>
+    				<label>Title</label>
+    				<input type="text" style="width: 100%" ng-model="title">
+    			</fieldset>
+    			<fieldset>
+    				<label>Content</label>
+    				<textarea rows="12" style="width: 100%" ng-model="contentencoded"></textarea>
+    			</fieldset>
+    	</div>
+    <footer>
+    	<div class="submit_link">
+    		<input type="submit" value="Publish" ng-click="sendDoc()">
+    	</div>
+    </footer>
+</article><!-- end of post new article -->

@@ -1,0 +1,83 @@
+<div ng-include="'navigation.html'">
+</div>
+		<article class="module width_full">
+        <header>
+			<form name="selectProfile" method="GET">
+              <select name="profile" ng-model="profile">
+                <option value="all">All</option>
+                <option value="story">Story</option>
+                <option value="image">Image</option>
+                <option value="audio">Audio</option>
+                <option value="video">Video</option>
+                <option value="group">Group</option>
+              </select>
+              <select name="creator" ng-model="creator">
+                <option value="all">All</option>
+                <!-- sandbox founders group https://api-sandbox.pmp.io/docs/31f0b41d-03cb-473c-8112-4b34b1b1b0ca -->
+                <!-- production founders group https://api.pmp.io/docs/cece1de5-a4db-4cc9-9d7f-dd9265c5614f  -->
+                <option value="6140faf0-fb45-4a95-859a-070037fafa01">NPR</option>
+                <option value="7a865268-c9de-4b27-a3c1-983adad90921">PRI</option>
+                <option value="98bf597a-2a6f-446c-9b7e-d8ae60122f0d">APM</option>
+                <option value="609a539c-9177-4aa7-acde-c10b77a6a525">PRX</option>
+                <option value="fc53c568-e939-4d9c-86ea-c2a2c70f1a99">PBS</option>
+                <option value="39b744ba-e132-4ef3-9099-885aef0ff2f1">NPRDS</option>
+              </select>
+              <select name="collection" ng-model="collection">
+                <option value="any">Any program</option>
+                <option value="9a5e5095-c9a5-44cc-9788-4093d6390c7e">The Moth</option>
+                <option value="714b1185-63b6-41b7-8c79-07d6e9700c4b">The Splendid Table</option>
+                <option value="3e3b6243-31c6-4686-bb88-a8e8446f0c2a">Marketplace</option>
+                <option value="4d3a942d-91c0-46a5-86df-9338f88c8487">PRI's The World</option>
+              </select>
+              <select name="has" ng-model="has">
+                <option value="any">Has any/no media</option>
+                <option value="5f4fe868-5065-4aa2-86e6-2387d2c7f1b6">Has image</option>
+                <option value="ef7f170b-4900-4a20-8b77-3142d4ac07ce">Has audio</option>
+                <option value="5f4fe868-5065-4aa2-86e6-2387d2c7f1b6,ef7f170b-4900-4a20-8b77-3142d4ac07ce">Has both</option>
+              </select>
+              <input type="text" name="text" ng-model="text" placeholder="Search text">
+              <input type="submit" ng-click="limitQuery()" />
+            </form></header>
+            <div ng-show="loading" style="text-align: center; padding-top: 50px;"><img src="css/ajax-loader.gif"></div>
+			<div class="module_content" ng-hide="loading">
+            <table class="tablesorter">
+              <tbody>
+              <thead> 
+                <tr>
+                  <th>Title</th>
+                  <th>Creator</th>
+                  <th>Profile</th>
+                  <th>Published</th>
+                  <th>GUID</th>
+                  <th>Operations</th>
+                </tr>
+                </thead>
+                <tr ng-show="!docs.length"><td colspan="6">No docs found</td></tr>
+                <tr ng-repeat="doc in docs">
+                  <td>
+                  <a href="#doc/{{ doc.attributes.guid }}">{{ doc.attributes.title }}</a>
+              </td>
+              <td>
+                {{ doc.creator }}
+              </td>
+              <td>
+                {{ doc.profile }}
+              </td>
+              <td>
+                {{ doc.attributes.published | date : 'medium'}}
+              </td>
+                  <td>
+                {{ doc.attributes.guid }}
+              </td>
+              <td>
+              <ul ng-show="{{ doc.creatorGUID == userGUID }}">
+			    <li class="icn_edit_article"><a href="#/edit/{{ doc.attributes.guid }}">Edit</a></li>
+			    <li class="icn_trash_article"><a href="#">Delete</a></li>
+		      </ul>
+              </td>
+                </tr>
+              </tbody>
+            </table>
+				<div class="clear"></div>
+			</div>
+        </article><!-- end of docs article -->
